@@ -479,13 +479,21 @@ function renderQuiz() {
   const divHeader = document.createElement("div");
   divHeader.classList.add("quizHeader");
 
-  const spanNum = document.createElement("span");
+  const spanNum = document.createElement("div");
   spanNum.classList.add("questNum");
-  spanNum.textContent = `Domanda ${currentQuestion + 1} di ${shuffledQuestions.length}`;
 
-  const questionCategory = document.createElement("span");
+  const spanNumText = document.createElement("p");
+  spanNumText.textContent = `Domanda ${currentQuestion + 1} di ${shuffledQuestions.length}`;
+
+  spanNum.appendChild(spanNumText);
+
+  const questionCategory = document.createElement("div");
   questionCategory.classList.add("questionCategory");
-  questionCategory.textContent = q.category;
+
+  const questionCategoryText = document.createElement("p");
+  questionCategoryText.textContent = q.category;
+
+  questionCategory.appendChild(questionCategoryText);
 
   if (q.category === "JavaScript") {
     questionCategory.style.backgroundColor = "#739c5f";
@@ -869,7 +877,7 @@ function showResults() {
         if (answer === quest.correct_answer) {
           // Si aggiunge la classe true alla domanda corretta anche se non selezionata, non si evidenzia niente di rosso (classe false) e quando viene premuto
           // il bottone Mostra Risultati nella schermata di renderResults, la risposta non data sarà visualizzata in verde con una X rossa
-          chooseAnswer.classList.add("true");
+          chooseAnswer.classList.add("correct");
           const cross = document.createElement("span");
           cross.textContent = "✖";
           cross.classList.add("cross");
